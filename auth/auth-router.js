@@ -5,10 +5,10 @@ const getToken = require("./getToken")
 
 router.post('/register', async (req, res, next) => {
   // implement registration
-  let user = req.body 
+  let user = req.body
   const hash = bcrypt.hashSync(user.password, 14)
   user.password = hash
-
+  
   try{
     user = await Users.add(user)
     res.status(201).json(user)
@@ -19,7 +19,7 @@ router.post('/register', async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
   // implement login
-  let { username, password } = req.body 
+  let { username, password } = req.body
 
   try {
     user = await Users.findBy({ username }).first()
